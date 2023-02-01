@@ -45,9 +45,7 @@
                     </v-col>
                 </v-row>
                 <v-list-item class="pl-1">
-                    <v-list-item-icon>
-                        <v-icon :style="`transform: rotate(${weatherForecast?.wind.deg}deg)`">mdi-send</v-icon>
-                    </v-list-item-icon>
+
                     <v-list-item-subtitle class="text-h6">{{Math.round(weatherForecast?.wind.speed)}} km/h</v-list-item-subtitle>
                 </v-list-item>
                 <v-list-item class="pl-1">
@@ -62,7 +60,7 @@
 
 <script>
     export default {
-        name: 'WeatherForecastItem',
+        name: 'WeatherForecast',
         props:['weatherForecast', 'loading'],
         methods: {
 
