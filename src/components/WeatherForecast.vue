@@ -9,14 +9,12 @@
                         </sup>
                     </v-list-item-title>
                     <v-list-item-subtitle>
-                        {{(new Date((weatherForecast?.dt + weatherForecast?.timezone - 10800) * 1000)
-                            .toLocaleDateString('en-US', {
-                                weekday:'long',
-                                hour12:false,
-                                hour:'2-digit',
-                                minute:'2-digit'
-                            }
-                        ))}}
+                        {{ getDate({time: weatherForecast?.dt, timezone: weatherForecast?.timezone}).toLocaleDateString('en-US', {
+                        weekday:'long',
+                        hour12:false,
+                        hour:'2-digit',
+                        minute:'2-digit'
+                        }) }}
                     </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
@@ -45,7 +43,11 @@
                     </v-col>
                 </v-row>
                 <v-list-item class="pl-1">
-
+                    <v-list-item-icon>
+                        <v-icon :style="`transform: rotate(${weatherForecast?.wind.deg}deg)`">
+                            mdi-send
+                        </v-icon>
+                    </v-list-item-icon>
                     <v-list-item-subtitle class="text-h6">{{Math.round(weatherForecast?.wind.speed)}} km/h</v-list-item-subtitle>
                 </v-list-item>
                 <v-list-item class="pl-1">
@@ -59,14 +61,14 @@
 </template>
 
 <script>
+    import dateMixins from "@/mixins/dateMixins";
+
     export default {
         name: 'WeatherForecast',
+        mixins: [dateMixins],
         props:['weatherForecast', 'loading'],
         methods: {
 
         },
-        mounted() {
-            console.log(this.weatherForecast)
-        }
     };
 </script>

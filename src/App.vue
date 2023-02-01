@@ -36,6 +36,7 @@ export default {
   },
 
     methods: {
+      // Получаем прогноз погоды сразу везде и сегодня и следующие 4 дня
       getWeatherForecast() {
           if(this.cityName) {
               this.makeGetRequest({
@@ -76,17 +77,20 @@ export default {
               this.clearForm()
           }
       },
-
+        // Получение геоопозиции не работает на корп. компе, поэтому буду допиливать дома
         getCurrentGeoposition() {
           navigator.geolocation.getCurrentPosition(
               (pos) => this.coords = pos.coords,
               (error) => console.warn(`Error(${error.code}): ${error.message}`))
         },
 
+        // Просто отчиска формы ввода названия Города в котором нужно узнать погоду
         clearForm() {
           this.cityName = '';
         },
 
+        // Делает get-запрос по указанной ссылке с указаными параметрами поиска
+        // Вызывает соответствующую функцию в зависимости от полученного ответа
         makeGetRequest({link, params, successCallback, errorCallback}) {
           this.loading = true;
           fetch(`${link}?` + new URLSearchParams(params))
